@@ -1,11 +1,10 @@
 pre-commit:
   parallel: true
   commands:
-    lint:
-      glob: "*.{js,ts,jsx,tsx}"
-      run: npx eslint {staged_files}
+    prettify:
+      run: npx prettier --write src/**/*.{ts,tsx}
     types:
-      glob: "*.{js,ts, jsx, tsx}"
+      glob: "*.{ts,tsx}"
       run: npx tsc --noEmit
 commit-msg:
   parallel: true

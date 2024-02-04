@@ -1,7 +1,7 @@
 {
   "name": "react-native-test-preview",
   "version": "0.1.0",
-  "description": "Library that helps debuggging component tests by providing a visual of failed stateo f your tetssts",
+  "description": "This library provides a visual testing platform for your components. Write your component tests and instantly preview how they render on the screen.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/src/index.d.ts",
@@ -30,6 +30,7 @@
     "test": "jest",
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
+    "prettier:write": "prettier --write \"src/**/*.{js,ts,tsx}\"",
     "clean": "del-cli lib",
     "prepare": "bob build",
     "release": "release-it"
@@ -60,6 +61,7 @@
     "@types/jest": "^28.1.2",
     "@types/react": "~17.0.21",
     "@types/react-native": "0.70.0",
+    "@types/react-test-renderer": "^18.0.7",
     "commitlint": "^17.0.2",
     "del-cli": "^5.0.0",
     "eslint": "^8.4.1",
@@ -70,6 +72,7 @@
     "react": "18.2.0",
     "react-native": "0.73.2",
     "react-native-builder-bob": "^0.20.0",
+    "react-test-renderer": "^18.2.0",
     "release-it": "^15.0.0",
     "typescript": "^5.0.2"
   },
@@ -78,25 +81,21 @@
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-test-renderer": "*"
   },
   "workspaces": [
     "example"
   ],
   "packageManager": "yarn@3.6.1",
   "engines": {
-    "node": ">= 18.0.0"
+    "node": ">= 14.0.0"
   },
   "jest": {
     "preset": "react-native",
     "modulePathIgnorePatterns": [
       "<rootDir>/example/node_modules",
       "<rootDir>/lib/"
-    ]
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
     ]
   },
   "release-it": {
