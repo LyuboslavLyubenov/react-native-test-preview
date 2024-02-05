@@ -1,6 +1,6 @@
 # react-native-test-preview
 
-Library that helps debuggging component tests by providing a visual of failed stateo f your tetssts
+This library provides a visual testing platform for your components. Write your component tests and instantly preview how they render on the screen.
 
 ## Installation
 
