@@ -2,8 +2,10 @@
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
-      "react-native-test-preview": ["./src/index"]
+      "react-native-test-preview/setup": ["./src/setup.tsx"],
+      "react-native-test-preview/savePreview": ["./src/savePreview.ts"]
     },
+    "noImplicitAny": false,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "esModuleInterop": true,

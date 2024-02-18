@@ -4,9 +4,12 @@
   "description": "This library provides a visual testing platform for your components. Write your component tests and instantly preview how they render on the screen.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
-  "types": "lib/typescript/src/index.d.ts",
-  "react-native": "src/index",
-  "source": "src/index",
+  "react-native": "src/",
+  "source": "src/",
+  "exports": {
+    "./setup": "./src/setup.ts",
+    "./savePreview": "./src/savePreview.ts"
+  },
   "files": [
     "src",
     "lib",
@@ -26,7 +29,7 @@
     "!**/.*"
   ],
   "scripts": {
-    "example": "yarn workspace react-native-test-preview-example",
+    "example": "yarn workspace react-native-test-preview-example start",
     "test": "jest",
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",

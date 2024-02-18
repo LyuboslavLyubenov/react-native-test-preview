@@ -49,7 +49,7 @@ function stringifyWithCircular(obj: unknown) {
   return JSON.stringify(obj, replacer, 2);
 }
 
-export function savePreview(rendered: ScreenDebugType) {
+export default function savePreview(rendered: ScreenDebugType) {
   fs.writeFileSync(
     path.join(__dirname, 'rendered.json'),
     stringifyWithCircular(rendered)

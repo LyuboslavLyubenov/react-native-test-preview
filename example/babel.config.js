@@ -2,11 +2,12 @@ const path = require('path');
 const pak = require('../package.json');
 
 module.exports = function (api) {
-  api.cache(true);
+  api.cache(false);
 
   return {
     presets: ['babel-preset-expo'],
     plugins: [
+      ['module:react-native-dotenv'],
       [
         'module-resolver',
         {

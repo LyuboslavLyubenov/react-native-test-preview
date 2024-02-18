@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   Text,
@@ -18,12 +18,17 @@ const nativeElementMap: Record<string, typeof React.Component> = {
   View: View,
   RCTText: Text,
   Text: Text,
+  TextInput: TextInput,
   RCTTextInput: TextInput,
+  Switch: Switch,
   RCTSwitch: Switch,
+  ScrollView: ScrollView,
   RCTScrollView: ScrollView,
+  Modal: Modal,
   RCTModalHostView: Modal,
-  Image: Image,
   RCTSafeAreaView: SafeAreaView,
+  SafeAreaView: SafeAreaView,
+  Image: Image,
   BaseImage: Image,
   ActivityIndicator: ActivityIndicator,
 };
@@ -62,12 +67,16 @@ function isTestRenderedJSON(
   return Array.isArray(json) || !!json?.type;
 }
 
-export function TestPreviewComponent({
-  jsonToRender,
-}: {
-  jsonToRender: ScreenDebugType;
-}) {
-  return renderJSON(jsonToRender);
+export function TestPreviewComponent() {
+  const [json, setJson] = React.useState<ScreenDebugType>(null);
+
+  useEffect(() => {
+    import('./rendered.json').then((data) => {
+      setJson(data);
+    });
+  }, []);
+
+  return renderJSON(json);
 }
 
 export function registerComponent(
