@@ -11,29 +11,28 @@ import savePreview from 'react-native-test-preview/savePreview';
 describe('Todo', () => {
   afterEach(() => cleanup());
 
+  async function addTask(taskName: string) {
+    const inputField = await screen.findByPlaceholderText('Add a new task...');
+    fireEvent.changeText(inputField, taskName);
+    const addButton = await screen.findByTestId('addTodoBtn');
+    fireEvent.press(addButton);
+  }
+
   it('should add a task', async () => {
     render(<TodoApp />);
-    const inputField = await screen.findByPlaceholderText('Add a new task...');
-    fireEvent.changeText(inputField, 'New todo task');
-    const addButton = await screen.findByTestId('addTodoBtn');
-    fireEvent.press(addButton);
-    //see changes on screen
+
+    await addTask('New todo task');
+    await addTask('Another todo task');
+    await addTask('Yet another todo task');
+
+    const deleteButtons = await screen.findAllByText('Delete');
+
+    if (deleteButtons[0]) {
+      fireEvent.press(deleteButtons[0]);
+    }
+
     savePreview(screen.toJSON());
 
-    expect(screen.getByText('New todo task')).toBeTruthy();
-  });
-
-  it('should remove a task', async () => {
-    render(<TodoApp />);
-    const inputField = await screen.findByPlaceholderText('Add a new task...');
-    fireEvent.changeText(inputField, 'New todo task');
-    screen.debug();
-    const addButton = await screen.findByTestId('addTodoBtn');
-    fireEvent.press(addButton);
-
-    const deleteBtn = await screen.findByText('Delete');
-    fireEvent.press(deleteBtn);
-    //see
-    expect(screen.getByText('New todo task')).toBeTruthy();
+    expect(screen.getByText('Another todo task')).toBeTruthy();
   });
 });

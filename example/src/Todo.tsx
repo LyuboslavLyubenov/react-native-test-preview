@@ -5,7 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  FlatList,
+  VirtualizedList,
 } from 'react-native';
 
 const TodoApp = () => {
@@ -14,13 +14,13 @@ const TodoApp = () => {
 
   const addTask = () => {
     if (taskText.trim() !== '') {
-      setTasks([...tasks, { id: Date.now(), text: taskText }]);
+      setTasks((oldTasks) => [...oldTasks, taskText]);
       setTaskText('');
     }
   };
 
   const removeTask = (taskId) => {
-    const updatedTasks = tasks.filter((task) => task.id !== taskId);
+    const updatedTasks = tasks.filter((task) => task !== taskId);
     setTasks(updatedTasks);
   };
 
@@ -42,13 +42,15 @@ const TodoApp = () => {
           <Text style={styles.buttonText}>Add</Text>
         </TouchableOpacity>
       </View>
-      <FlatList
+      <VirtualizedList
+        getItem={(data, index) => data[index]}
+        getItemCount={() => tasks.length}
         data={tasks}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item: string) => item}
         renderItem={({ item }) => (
           <View style={styles.taskContainer}>
-            <Text style={styles.taskText}>{item.text}</Text>
-            <TouchableOpacity onPress={() => removeTask(item.id)}>
+            <Text style={styles.taskText}>{item}</Text>
+            <TouchableOpacity onPress={() => removeTask(item)}>
               <Text style={styles.deleteButton}>Delete</Text>
             </TouchableOpacity>
           </View>
