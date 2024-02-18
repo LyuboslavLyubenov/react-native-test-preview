@@ -1,31 +1,65 @@
-# react-native-test-preview
+# React native test preview
 
-This library provides a visual testing platform for your components. Write your component tests and instantly preview how they render on the screen.
+<p align="center">
+  Utility that allows visualization of component tests.
+</p>
 
-## Installation
+<p align="center">
+  <img align="center" src="./preview.gif" alt="Test preview demo" />
+</p>
 
-```sh
-npm install react-native-test-preview
+## Features
+
+- Preview your app state while writing tests
+- Auto reload the screen when your test executes
+- Supports all style libraries out the box
+- Supports external libraries with `registerComponent`
+
+## How to use
+
+In your App.tsx file:
+```diff
++import { TestPreviewComponent } from 'react-native-test-preview/setup';
+
+function App() {
+  //...
+-  return ...;
++  return <TestPreviewComponent />;
+}
 ```
 
-## Usage
+And in your test files:
 
-```js
-import { multiply } from 'react-native-test-preview';
+```diff
++import savePreview from 'react-native-test-preview/savePreview';
 
-// ...
-
-const result = await multiply(3, 7);
+describe('App', () => {
+  it('should work as expected', () => {
+    render(<App />);
++   savePreview(screen.toJSON());
+  });
+});
 ```
 
-## Contributing
+## Caveats
 
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+If you test components that have external libraries with custom native components, like ReactNativeMaps, you have to register them with `registerComponent` fn.
 
-## License
+Example:
+```jsx
+import { registerComponent } from 'react-native-test-preview/setup';
+import MyLibraryComponent from 'external-library';
 
-MIT
+registerComponent(MyLibraryComponent)
+```
+or
+```jsx
+import { registerComponent } from 'react-native-test-preview/setup';
+import MyLibraryComponent from 'external-library';
 
----
+registerComponent(MyLibraryComponent, { prop1: value, prop2: value2 })
+```
 
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
+## Contribution
+
+See the Contribution Guide at [CONTRIBUTING.md](/CONTRIBUTING.md)
