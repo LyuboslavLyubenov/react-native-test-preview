@@ -21,7 +21,7 @@
 
 In your App.tsx file:
 ```diff
-+import { TestPreviewComponent } from 'react-native-test-preview/setup';
++import { TestPreviewComponent } from 'react-native-test-preview/lib/commonjs/setup';
 
 function App() {
   //...
@@ -33,7 +33,7 @@ function App() {
 And in your test files:
 
 ```diff
-+import savePreview from 'react-native-test-preview/savePreview';
++import savePreview from 'react-native-test-preview/lib/commonjs/savePreview';
 
 describe('App', () => {
   it('should work as expected', () => {
@@ -49,14 +49,14 @@ If you test components that have external libraries with custom native component
 
 Example:
 ```jsx
-import { registerComponent } from 'react-native-test-preview/setup';
+import { registerComponent } from 'react-native-test-preview/lib/commonjs/setup';
 import MyLibraryComponent from 'external-library';
 
 registerComponent(MyLibraryComponent)
 ```
 or
 ```jsx
-import { registerComponent } from 'react-native-test-preview/setup';
+import { registerComponent } from 'react-native-test-preview/lib/commonjs/setup';
 import MyLibraryComponent from 'external-library';
 
 registerComponent(MyLibraryComponent, { prop1: value, prop2: value2 })
