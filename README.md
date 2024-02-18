@@ -17,6 +17,8 @@
 
 ## How to use
 
+`npm i react-native-test-preview`
+
 In your App.tsx file:
 ```diff
 +import { TestPreviewComponent } from 'react-native-test-preview/setup';
