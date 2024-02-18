@@ -1,6 +1,6 @@
 {
   "name": "react-native-test-preview",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "This library provides a visual testing platform for your components. Write your component tests and instantly preview how they render on the screen.",
   "main": "lib/commonjs/",
   "module": "lib/module/",
